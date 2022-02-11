@@ -219,7 +219,6 @@ class ConvLayer(object):
                 filter.get_weights()))
             # 计算与一个filter对应的delta_array
             delta_array = self.create_delta_array()
-            print(padded_array+flipped_weights+delta_array)
             for d in range(delta_array.shape[0]):
                 conv(padded_array[f], flipped_weights[d],
                      delta_array[d], 1, 0)
@@ -458,11 +457,4 @@ def test_pool_bp():
         'input array:\n%s\nsensitivity array:\n%s\ndelta array:\n%s' % (
             a, b, mpl.delta_array))
 
-if __name__ == '__name__':
-    a, b, cl = init_test()
-    cl.backward(a, b, IdentityActivator())
-    cl.update()
-    print(
-        cl.filters[0])
-    print(
-        cl.filters[1])
+test_bp()
